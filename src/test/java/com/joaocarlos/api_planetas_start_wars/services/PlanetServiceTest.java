@@ -62,4 +62,23 @@ public class PlanetServiceTest {
 
         assertThat(sut).isEmpty();
     }
+
+    @Test
+    public void getPlanetByName_ByExistingName_ReturnsPlanet() {
+        when(planetRespository.findByName(PLANET.getName())).thenReturn(Optional.of(PLANET));
+
+        Optional<Planet> sut = planetService.getPlanetByName("name");
+
+        assertThat(sut).isNotEmpty();
+        assertThat(sut.get()).isEqualTo(PLANET);
+    }
+
+    @Test
+    public void getPlanetByName_ByExistingName_ReturnsEmpty() {
+        when(planetRespository.findByName(PLANET.getName())).thenReturn(Optional.empty());
+
+        Optional<Planet> sut = planetService.getPlanetByName("name");
+
+        assertThat(sut).isEmpty();
+    }
 }
