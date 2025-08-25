@@ -23,6 +23,10 @@ public class PlanetService {
         return this.planetRespository.findById(id);
     }
 
+    public Optional<Planet> getPlanetByName(String name) {
+        return this.planetRespository.findByName(name);
+    }
+
     public List<Planet> listPlanets() {
         return this.planetRespository.findAll();
     }

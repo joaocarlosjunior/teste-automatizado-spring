@@ -27,6 +27,11 @@ public class PlanetsController {
         return planetService.getPlanetById(id).map(planet -> ResponseEntity.ok(planet)).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Planet> getPlanetByName(@PathVariable String name) {
+        return planetService.getPlanetByName(name).map(planet -> ResponseEntity.ok(planet)).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @GetMapping
     public ResponseEntity<List<Planet>> getPlanets() {
         return ResponseEntity.ok(planetService.listPlanets());
