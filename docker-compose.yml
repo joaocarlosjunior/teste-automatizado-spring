@@ -1,0 +1,12 @@
+version: '3.3'
+services:
+  db:
+    image: postgres:15.6
+    container_name: postgres_sw_planets
+    environment:
+      POSTGRES_DB: 'sw_planets_db'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'password'
+      POSTGRES_ROOT_PASSWORD: 'root'
+    ports:
+      - '5432:5432'
