@@ -37,4 +37,18 @@ public class PlanetsController {
         return ResponseEntity.ok(planetService.listPlanets());
     }
 
+    @GetMapping("/filter")
+    public ResponseEntity<List<Planet>> filterPlanetsByTerrainOrClimate(
+            @RequestParam(required = false) String terrain,
+            @RequestParam(required = false) String climate
+    ) {
+        return ResponseEntity.ok(this.planetService.filterByClimateOrTerrain(terrain, climate));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePlanetById(@PathVariable Long id) {
+        this.planetService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
