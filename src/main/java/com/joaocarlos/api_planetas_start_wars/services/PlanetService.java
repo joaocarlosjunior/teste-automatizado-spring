@@ -1,7 +1,9 @@
 package com.joaocarlos.api_planetas_start_wars.services;
 
+import com.joaocarlos.api_planetas_start_wars.builder.QueryBuilder;
 import com.joaocarlos.api_planetas_start_wars.domain.Planet;
 import com.joaocarlos.api_planetas_start_wars.repositories.PlanetRespository;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,5 +31,14 @@ public class PlanetService {
 
     public List<Planet> listPlanets() {
         return this.planetRespository.findAll();
+    }
+
+    public List<Planet> filterByClimateOrTerrain(String climate, String terrain) {
+        Example<Planet> query = QueryBuilder.makeQuery(new Planet(climate, terrain));
+        return planetRespository.findAll(query);
+    }
+
+    public void delete(Long id) {
+        planetRespository.deleteById(id);
     }
 }
