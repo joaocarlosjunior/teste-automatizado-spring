@@ -79,7 +79,7 @@ public class PlanetServiceTest {
     }
 
     @Test
-    public void getPlanetByName_ByExistingName_ReturnsEmpty() {
+    public void getPlanetByName_ByUnexistingName_ReturnsEmpty() {
         when(planetRespository.findByName(PLANET.getName())).thenReturn(Optional.empty());
 
         Optional<Planet> sut = planetService.getPlanetByName("name");
