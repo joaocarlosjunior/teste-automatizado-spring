@@ -1,10 +1,13 @@
 package com.joaocarlos.api_planetas_start_wars.repositories;
 
 import com.joaocarlos.api_planetas_start_wars.domain.Planet;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+
+import java.util.Optional;
 
 import static com.joaocarlos.api_planetas_start_wars.common.PlanetConstants.INVALID_PLANET;
 import static com.joaocarlos.api_planetas_start_wars.common.PlanetConstants.PLANET;
@@ -17,6 +20,11 @@ public class PlanetRepositoryTest {
     private PlanetRespository planetRespository;
     @Autowired
     private TestEntityManager testEntityManager;
+
+    @AfterEach
+    public void afterEach() {
+        PLANET.setId(null);
+    }
 
     @Test
     public void createPlanet_WithValidData_ReturnsPlanet() {
@@ -38,11 +46,28 @@ public class PlanetRepositoryTest {
     }
 
     @Test
-    public void createPlanet_WithExistingName_ThrowsException(){
+    public void createPlanet_WithExistingName_ThrowsException() {
         Planet planet = testEntityManager.persistFlushFind(PLANET);
         testEntityManager.detach(planet);
         planet.setId(null);
 
         assertThatThrownBy(() -> planetRespository.save(planet)).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    public void getPlanet_ByExistingId_ReturnsPlanet() {
+        Planet planet = testEntityManager.persistFlushFind(PLANET);
+
+        Optional<Planet> sut = planetRespository.findById(planet.getId());
+
+        assertThat(sut).isNotEmpty();
+        assertThat(sut.get().getName()).isEqualTo(planet.getName());
+    }
+
+    @Test
+    public void getPlanet_ByUnexistingId_ReturnsEmpty() {
+        Optional<Planet> sut = planetRespository.findById(99L);
+
+        assertThat(sut).isEmpty();
     }
 }
