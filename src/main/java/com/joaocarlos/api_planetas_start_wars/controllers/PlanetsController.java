@@ -4,6 +4,7 @@ import com.joaocarlos.api_planetas_start_wars.domain.Planet;
 import com.joaocarlos.api_planetas_start_wars.services.PlanetService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class PlanetsController {
     }
 
     @PostMapping
-    public ResponseEntity<Planet> create(@RequestBody Planet planet) {
+    public ResponseEntity<Planet> create(@RequestBody @Validated Planet planet) {
         return ResponseEntity.status(HttpStatus.CREATED).body(planetService.createPlanet(planet));
     }
 
