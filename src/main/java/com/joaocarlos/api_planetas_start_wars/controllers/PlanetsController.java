@@ -33,17 +33,12 @@ public class PlanetsController {
         return planetService.getPlanetByName(name).map(planet -> ResponseEntity.ok(planet)).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping
-    public ResponseEntity<List<Planet>> getPlanets() {
-        return ResponseEntity.ok(planetService.listPlanets());
-    }
-
-    @GetMapping("/filter")
+    @GetMapping()
     public ResponseEntity<List<Planet>> filterPlanetsByTerrainOrClimate(
             @RequestParam(required = false) String terrain,
             @RequestParam(required = false) String climate
     ) {
-        return ResponseEntity.ok(this.planetService.filterByClimateOrTerrain(terrain, climate));
+        return ResponseEntity.ok(this.planetService.filterByClimateOrTerrain(climate, terrain));
     }
 
     @DeleteMapping("/{id}")
