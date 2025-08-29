@@ -10,10 +10,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
-import static com.joaocarlos.api_planetas_start_wars.common.PlanetConstants.INVALID_PLANET;
-import static com.joaocarlos.api_planetas_start_wars.common.PlanetConstants.PLANET;
+import static com.joaocarlos.api_planetas_start_wars.common.PlanetConstants.*;
+import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -39,7 +41,7 @@ public class PlanetControllerTest {
 
         // Act e Assert
         mockMvc.perform(post("/planets").content(objectMapper.writeValueAsString(PLANET))
-                .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$").value(PLANET));
     }
@@ -76,5 +78,54 @@ public class PlanetControllerTest {
         mockMvc.perform(get("/planets/{id}", 99L)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void getPlanet_ByExistingName_ReturnsPlanet() throws Exception {
+        when(planetService.getPlanetByName(PLANET.getName())).thenReturn(Optional.of(PLANET));
+
+        mockMvc.perform(get("/planets/name/{name}", PLANET.getName())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").value(PLANET));
+    }
+
+    @Test
+    public void getPlanet_ByUnexistingName_ReturnsEmpty() throws Exception {
+        when(planetService.getPlanetByName(any())).thenReturn(Optional.empty());
+
+        mockMvc.perform(get("/planets/name/{name}", "teste")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void listPlanets_ReturnsFilteredPlanets() throws Exception {
+        when(planetService.filterByClimateOrTerrain(null, null)).thenReturn(PLANETS);
+        when(planetService.filterByClimateOrTerrain(TATOOINE.getClimate(), TATOOINE.getTerrain())).thenReturn(List.of(TATOOINE));
+
+        mockMvc.perform(get("/planets"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(3)));
+
+        mockMvc.perform(get("/planets")
+                        .param("terrain", TATOOINE.getTerrain())
+                        .param("climate", TATOOINE.getClimate())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0]").value(TATOOINE));
+    }
+
+    @Test
+    public void listPlanets_ReturnsNoPlanets() throws Exception {
+        when(planetService.filterByClimateOrTerrain("Clima", "Terra")).thenReturn(Collections.emptyList());
+
+        mockMvc.perform(get("/planets/filter")
+                        .param("terrain", "Terra")
+                        .param("climate", "Clima")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isEmpty());
     }
 }
