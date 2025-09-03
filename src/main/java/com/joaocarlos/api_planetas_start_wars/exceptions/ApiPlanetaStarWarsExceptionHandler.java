@@ -1,6 +1,7 @@
 package com.joaocarlos.api_planetas_start_wars.exceptions;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.*;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -29,4 +30,10 @@ public class ApiPlanetaStarWarsExceptionHandler extends ResponseEntityExceptionH
     private ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
+
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+    private ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
 }
