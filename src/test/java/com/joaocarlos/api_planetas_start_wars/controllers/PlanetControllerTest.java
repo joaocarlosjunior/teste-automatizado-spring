@@ -98,7 +98,12 @@ public class PlanetControllerTest {
     public void listPlanets_ReturnsNoPlanets() throws Exception {
         when(planetService.filterByClimateOrTerrain("Clima", "Terra")).thenReturn(Collections.emptyList());
 
-        mockMvc.perform(get("/planets/filter").param("terrain", "Terra").param("climate", "Clima").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andExpect(jsonPath("$").isEmpty());
+        mockMvc.perform(get("/planets")
+                .param("terrain", "Terra")
+                .param("climate", "Clima")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isEmpty());
     }
 
     @Test
