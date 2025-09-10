@@ -29,10 +29,6 @@ public class PlanetService {
         return this.planetRespository.findByName(name);
     }
 
-    public List<Planet> listPlanets() {
-        return this.planetRespository.findAll();
-    }
-
     public List<Planet> filterByClimateOrTerrain(String climate, String terrain) {
         Example<Planet> query = QueryBuilder.makeQuery(new Planet(climate, terrain));
         return planetRespository.findAll(query);
