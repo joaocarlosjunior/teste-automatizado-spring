@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.joaocarlos</groupId>
-    <artifactId>api-planeta-star-wars</artifactId>
+    <artifactId>swplanetapi</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>api-planeta-star-wars</name>
+    <name>swplanetapi</name>
     <description>Demo project for Spring Boot</description>
     <url/>
     <licenses>
@@ -95,6 +95,30 @@
                         <goals>
                             <goal>integration-test</goal>
                             <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>com/joaocarlos/swplanetapi/ApiPlanetaStarWarsApplication.class</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>
