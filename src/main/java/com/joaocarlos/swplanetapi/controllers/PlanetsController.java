@@ -1,7 +1,7 @@
-package com.joaocarlos.api_planetas_start_wars.controllers;
+package com.joaocarlos.swplanetapi.controllers;
 
-import com.joaocarlos.api_planetas_start_wars.domain.Planet;
-import com.joaocarlos.api_planetas_start_wars.services.PlanetService;
+import com.joaocarlos.swplanetapi.domain.Planet;
+import com.joaocarlos.swplanetapi.services.PlanetService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

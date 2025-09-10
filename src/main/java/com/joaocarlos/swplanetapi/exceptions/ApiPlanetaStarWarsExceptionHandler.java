@@ -1,4 +1,4 @@
-package com.joaocarlos.api_planetas_start_wars.exceptions;
+package com.joaocarlos.swplanetapi.exceptions;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;

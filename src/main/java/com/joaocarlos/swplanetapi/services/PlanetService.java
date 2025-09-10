@@ -1,8 +1,8 @@
-package com.joaocarlos.api_planetas_start_wars.services;
+package com.joaocarlos.swplanetapi.services;
 
-import com.joaocarlos.api_planetas_start_wars.builder.QueryBuilder;
-import com.joaocarlos.api_planetas_start_wars.domain.Planet;
-import com.joaocarlos.api_planetas_start_wars.repositories.PlanetRespository;
+import com.joaocarlos.swplanetapi.builder.QueryBuilder;
+import com.joaocarlos.swplanetapi.domain.Planet;
+import com.joaocarlos.swplanetapi.repositories.PlanetRespository;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 

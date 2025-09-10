@@ -1,7 +1,7 @@
-package com.joaocarlos.api_planetas_start_wars.repositories;
+package com.joaocarlos.swplanetapi.repositories;
 
-import com.joaocarlos.api_planetas_start_wars.builder.QueryBuilder;
-import com.joaocarlos.api_planetas_start_wars.domain.Planet;
+import com.joaocarlos.swplanetapi.builder.QueryBuilder;
+import com.joaocarlos.swplanetapi.domain.Planet;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.test.context.jdbc.Sql;
 import java.util.List;
 import java.util.Optional;
 
-import static com.joaocarlos.api_planetas_start_wars.common.PlanetConstants.*;
+import static com.joaocarlos.swplanetapi.common.PlanetConstants.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

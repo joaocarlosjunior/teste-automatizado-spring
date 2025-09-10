@@ -1,4 +1,4 @@
-package com.joaocarlos.api_planetas_start_wars;
+package com.joaocarlos.swplanetapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,8 +1,8 @@
-package com.joaocarlos.api_planetas_start_wars.services;
+package com.joaocarlos.swplanetapi.services;
 
-import com.joaocarlos.api_planetas_start_wars.builder.QueryBuilder;
-import com.joaocarlos.api_planetas_start_wars.domain.Planet;
-import com.joaocarlos.api_planetas_start_wars.repositories.PlanetRespository;
+import com.joaocarlos.swplanetapi.builder.QueryBuilder;
+import com.joaocarlos.swplanetapi.domain.Planet;
+import com.joaocarlos.swplanetapi.repositories.PlanetRespository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,8 +14,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static com.joaocarlos.api_planetas_start_wars.common.PlanetConstants.INVALID_PLANET;
-import static com.joaocarlos.api_planetas_start_wars.common.PlanetConstants.PLANET;
+import static com.joaocarlos.swplanetapi.common.PlanetConstants.INVALID_PLANET;
+import static com.joaocarlos.swplanetapi.common.PlanetConstants.PLANET;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;

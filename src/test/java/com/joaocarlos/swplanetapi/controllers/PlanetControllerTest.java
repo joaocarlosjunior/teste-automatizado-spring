@@ -1,7 +1,7 @@
-package com.joaocarlos.api_planetas_start_wars.controllers;
+package com.joaocarlos.swplanetapi.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.joaocarlos.api_planetas_start_wars.services.PlanetService;
+import com.joaocarlos.swplanetapi.services.PlanetService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static com.joaocarlos.api_planetas_start_wars.common.PlanetConstants.*;
+import static com.joaocarlos.swplanetapi.common.PlanetConstants.*;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;

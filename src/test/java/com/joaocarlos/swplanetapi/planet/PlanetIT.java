@@ -1,6 +1,6 @@
-package com.joaocarlos.api_planetas_start_wars.planet;
+package com.joaocarlos.swplanetapi.planet;
 
-import com.joaocarlos.api_planetas_start_wars.domain.Planet;
+import com.joaocarlos.swplanetapi.domain.Planet;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.joaocarlos.api_planetas_start_wars.common.PlanetConstants.*;
+import static com.joaocarlos.swplanetapi.common.PlanetConstants.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ActiveProfiles("it")

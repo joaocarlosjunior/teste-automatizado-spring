@@ -1,6 +1,6 @@
-package com.joaocarlos.api_planetas_start_wars.builder;
+package com.joaocarlos.swplanetapi.builder;
 
-import com.joaocarlos.api_planetas_start_wars.domain.Planet;
+import com.joaocarlos.swplanetapi.domain.Planet;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 

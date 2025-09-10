@@ -1,4 +1,4 @@
-package com.joaocarlos.api_planetas_start_wars.domain;
+package com.joaocarlos.swplanetapi.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;

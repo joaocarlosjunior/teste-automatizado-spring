@@ -1,6 +1,6 @@
-package com.joaocarlos.api_planetas_start_wars.repositories;
+package com.joaocarlos.swplanetapi.repositories;
 
-import com.joaocarlos.api_planetas_start_wars.domain.Planet;
+import com.joaocarlos.swplanetapi.domain.Planet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
