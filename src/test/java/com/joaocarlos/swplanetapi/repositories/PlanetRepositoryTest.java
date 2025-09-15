@@ -4,6 +4,9 @@ import com.joaocarlos.swplanetapi.builder.QueryBuilder;
 import com.joaocarlos.swplanetapi.domain.Planet;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
@@ -12,6 +15,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static com.joaocarlos.swplanetapi.common.PlanetConstants.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,11 +45,21 @@ public class PlanetRepositoryTest {
         assertThat(sut.getTerrain()).isEqualTo(planet.getTerrain());
     }
 
-    @Test
-    public void createPlanet_WithInvalidData_ThrowsException() {
-        Planet planet = new Planet();
-        assertThatThrownBy(() -> planetRespository.save(INVALID_PLANET)).isInstanceOf(RuntimeException.class);
+    @ParameterizedTest
+    @MethodSource("providesInvalidPlanets")
+    public void createPlanet_WithInvalidData_ThrowsException(Planet planet) {
         assertThatThrownBy(() -> planetRespository.save(planet)).isInstanceOf(RuntimeException.class);
+    }
+
+    private static Stream<Arguments> providesInvalidPlanets() {
+        return Stream.of(
+                Arguments.of(new Planet(null, "climate", "terrain")),
+                Arguments.of(new Planet("name", null, "terrain")),
+                Arguments.of(new Planet(null, null, "terrain")),
+                Arguments.of(new Planet(null, "climate", null)),
+                Arguments.of(new Planet(null, null, null)),
+                Arguments.of(new Planet("", "", ""))
+        );
     }
 
     @Test
